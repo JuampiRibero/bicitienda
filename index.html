@@ -60,9 +60,6 @@
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Curso JavaScript - 2da Entrega Proyecto Final</h1>
-                    <div class="lead fw-normal text-white-50 mb-0">
-                        <button class="boton mt-5" onclick="correr();">Correr Algoritmo</button>
-                    </div>
             </div>
         </div>
     </header>
@@ -85,17 +82,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <!-- <div class="text-center" id="carrito-vacio">
+                        ¡El carrito está vacio!
+                    </div> -->
                     <div id="contenedor-carrito">
-
+                        
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="contenedor-precios">
-                        <p>Precio total: $<span id="precio-total"></span></p>
+                        <p>Subtotal: $<span id="subtotal"></span></p>
                         <p>IVA: $<span id="precio-con-iva"></span></p>
                         <p>Total a pagar: $<span id="precio-a-pagar"></span></p>
-                        <button onclick=eliminarTodo() class="boton-eliminar"><i class="fas fa-trash-alt"></i>Vaciar Carrito</button>
                     </div>
+                </div>
+                <div class="text-center pb-3">
+                    <button onclick="eliminarTodo()" class="btn btn-outline-dark"><i class="far fa-trash-alt me-2"></i>Vaciar Carrito</button>
                 </div>
             </div>
         </div>

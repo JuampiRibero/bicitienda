@@ -71,18 +71,6 @@ create(producto6);
 create(producto7);
 create(producto8);
 
-// Buscar un producto por su id
-console.log("Encontrar bicicleta con id #3:\n\n", findOne(3));
-
-// Actualizar el precio de un producto
-// update("Bicicleta Oxea Packard", 85200);
-
-// Eliminar un producto por su nombre
-// remove("Bicicleta Oxea Packard");
-
-// // Obtener la lista completa de productos
-// console.log("Lista de bicicletas:\n\n", getAll());
-
 // Catálogo ordenado por precios de menor a mayor, mostrado en consola
 var ordenarPrecioVenta = [];
 ordenarPrecioVenta = productos.map(item => item);
@@ -91,27 +79,8 @@ ordenarPrecioVenta.sort(function(a, b) {
 });
 console.log("Lista de precios ordenada de menor a mayor:\n\n", ordenarPrecioVenta);
 
-// Función para correr el algoritmo para interactuar con el usuario
-function correr() {
-
-    let usuario = prompt("Bienvenido, ingrese su nombre y apellido");
-    let respuesta = prompt("¿Quiere conocer nuestro catálogo de bicicletas Oxea? SI/NO").toUpperCase();
-
-    if(respuesta == "SI"){
-        for(let index = 0; index < productos.length; index++){
-            alert(`${index+1}. El precio de ${productos[index].nombre} es de $${productos[index].getPrecio()}`);
-        }
-        alert(`Gracias por su consulta ${usuario}, saludos!`);
-        alert(`Ver más salidas de información en consola!`);
-    }else{
-        alert(`Estimado ${usuario}, cuando quiera conocer nuestro catálogo aquí lo esperamos!`);
-    }
-    
-}
-
 // Agregar productos al HTML
 const cardProductos = document.getElementById("card-producto");
-// const listaProductos = document.getElementById("lista-productos");
 
 mostrarProductos(productos);
 
@@ -123,7 +92,7 @@ function mostrarProductos(array) {
         let div = document.createElement('div');
         div.classList.add("col", "mb-5");
         div.innerHTML = `
-                        <div class="card h-100">
+                        <div class="card h-100 border-primary border-3 card-efecto">
                             <img class="card-img-top" src=${producto.img} alt="${producto.nombre}" title="${producto.nombre}" loading="lazy">
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -164,19 +133,20 @@ function agregarAlCarrito(id) {
 function actualizarCarrito() {
     
     const contenedorCarrito = document.getElementById('contenedor-carrito');
-    const precioTotal = document.getElementById('precio-total');
+    const subtotal = document.getElementById('subtotal');
     const precioConIva = document.getElementById('precio-con-iva');
     const precioAPagar = document.getElementById('precio-a-pagar');
     const contadorCarrito = document.getElementById('contador-carrito');
 
-    contenedorCarrito.innerHTML = ''
+    contenedorCarrito.innerHTML = '';
 
     carrito.forEach((producto) => {
         contenedorCarrito.innerHTML += `
                                         <div class="producto-carrito">
-                                            <p>${producto.nombre}</p>
-                                            <p>Precio: $${producto.precio}</p>
-                                            <button onclick=eliminarProducto(${producto.id}) class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+                                            <img class="card-img-top img-carrito" src=${producto.img} alt="${producto.nombre}" title="${producto.nombre}" loading="lazy">
+                                            <p class="pt-3">${producto.nombre}</p>
+                                            <p class="pt-3">$${producto.precio}</p>
+                                            <button onclick=eliminarProducto(${producto.id}) class="boton-eliminar"><i class="far fa-trash-alt"></i></i></button>
                                         </div>
                                        `
     })
@@ -184,7 +154,7 @@ function actualizarCarrito() {
     let sumaProductos = carrito.reduce((acum, prod) => acum += prod.precio, 0);
     let ivaProductos = carrito.reduce((acum, prod) => acum += prod.precio * 0.21, 0);
     
-    precioTotal.innerText = sumaProductos.toFixed(2);
+    subtotal.innerText = sumaProductos.toFixed(2);
     precioConIva.innerText = ivaProductos.toFixed(2);
     precioConDecimal = sumaProductos + ivaProductos;
     precioAPagar.innerText = precioConDecimal.toFixed(2);
@@ -196,9 +166,9 @@ function actualizarCarrito() {
 
 // Eliminar producto
 function eliminarProducto(id) {
-    const sacarProducto = carrito.find(prod => prod.id == id);
-    const indice = carrito.indexOf(sacarProducto);
-    carrito.splice(indice, 1);
+    const sacarProducto = findOne(id);
+    const index = carrito.indexOf(sacarProducto);
+    carrito.splice(index, 1);
     
     localStorage.setItem('carrito', JSON.stringify(carrito));
     actualizarCarrito();
@@ -206,9 +176,11 @@ function eliminarProducto(id) {
 
 // Eliminar todos los productos
 function eliminarTodo() {
-    localStorage.clear(carrito);
-    carrito = [];
-    actualizarCarrito();
+    if (confirm("¿Querés vaciar el carrito?")) {
+        localStorage.clear(carrito);
+        carrito = [];
+        actualizarCarrito();
+    }
 }
 
 // Mostrar en consola en carrito de Local Storage
