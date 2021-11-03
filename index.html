@@ -35,7 +35,7 @@
     <!-- Inicio menú de navegación -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!">
+            <a class="navbar-brand" href="index.html">
                 <img src="https://i.ibb.co/xHTQSR9/logo-bicitienda.png" alt="Logo BiciTienda" title="BiciTienda" class="nav-logo" loading="lazy">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -103,6 +103,28 @@
         </div>
     </div>
     <!-- Fin modal carrito -->
+    <!-- Inicio modal producto agregado -->
+    <div class="modal fade" id="modal-producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
+        <div class="modal-dialog modal-side modal-bottom-right" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="row my-3">
+                        <div class="col-12">
+                            <p class="d-flex justify-content-center"><i class="far fa-check-circle fa-5x text-success"></i></p>
+                            <p class="text-center fs-5">¡Producto agregado al carrito!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-outline-dark mt-auto" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modal-carrito">Ir al carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin modal producto agregado -->
     <!-- Inicio pie de página -->
     <footer class="text-center text-white text-lg-start">
         <div class="container p-4">

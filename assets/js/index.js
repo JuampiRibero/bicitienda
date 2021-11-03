@@ -15,7 +15,7 @@ class Producto {
 }
 
 // Lista de productos y carrito
-let productos = JSON.parse(localStorage.getItem("productos")) || [];
+let productos = JSON.parse(localStorage.getItem('productos')) || [];
 let carrito = [];
 
 // Método que retorna la lista de productos
@@ -48,18 +48,18 @@ const remove = (id) => {
     const prod = findOne(id);
     const index = productos.indexOf(prod);
     productos.splice(index, 1);
-    localStorage.setItem("productos", JSON.stringify(productos));
+    localStorage.setItem('productos', JSON.stringify(productos));
 }
 
 // Crear los productos como instancia de la clase Producto
-const producto1 = new Producto(1, "Oxea Packard", "Oxea", 86600, 50, src="https://i.ibb.co/MZCfrCp/oxea-packard.png");
-const producto2 = new Producto(2, "Oxea Eikon", "Oxea", 82000, 50, src="https://i.ibb.co/X2jq1Z5/oxea-eikon.png");
-const producto3 = new Producto(3, "Oxea Talus", "Oxea", 68100, 50, src="https://i.ibb.co/v4tYDnx/oxea-talus.png");
-const producto4 = new Producto(4, "Oxea Riddich", "Oxea", 54000, 50, src="https://i.ibb.co/NtfJKm8/oxea-riddich.png");
-const producto5 = new Producto(5, "Oxea Shadane", "Oxea", 47600, 50, src="https://i.ibb.co/vdZBMYH/oxea-shadane.png");
-const producto6 = new Producto(6, "Oxea Hunter", "Oxea", 45800, 50, src="https://i.ibb.co/TYxPzdv/oxea-hunter.png");
-const producto7 = new Producto(7, "Oxea Campus", "Oxea", 51700, 50, src="https://i.ibb.co/ccnJ4kw/oxea-campus.png");
-const producto8 = new Producto(8, "Oxea Plegable", "Oxea", 49300, 50, src="https://i.ibb.co/Ny2SVsP/oxea-plegable.png");
+const producto1 = new Producto(1, 'Oxea Packard', 'Oxea', 86600, 50, src='https://i.ibb.co/MZCfrCp/oxea-packard.png');
+const producto2 = new Producto(2, 'Oxea Eikon', 'Oxea', 82000, 50, src='https://i.ibb.co/X2jq1Z5/oxea-eikon.png');
+const producto3 = new Producto(3, 'Oxea Talus', 'Oxea', 68100, 50, src='https://i.ibb.co/v4tYDnx/oxea-talus.png');
+const producto4 = new Producto(4, 'Oxea Riddich', 'Oxea', 54000, 50, src='https://i.ibb.co/NtfJKm8/oxea-riddich.png');
+const producto5 = new Producto(5, 'Oxea Shadane', 'Oxea', 47600, 50, src='https://i.ibb.co/vdZBMYH/oxea-shadane.png');
+const producto6 = new Producto(6, 'Oxea Hunter', 'Oxea', 45800, 50, src='https://i.ibb.co/TYxPzdv/oxea-hunter.png');
+const producto7 = new Producto(7, 'Oxea Campus', 'Oxea', 51700, 50, src='https://i.ibb.co/ccnJ4kw/oxea-campus.png');
+const producto8 = new Producto(8, 'Oxea Plegable', 'Oxea', 49300, 50, src='https://i.ibb.co/Ny2SVsP/oxea-plegable.png');
 
 // Agregar productos a la lista
 create(producto1);
@@ -77,10 +77,10 @@ ordenarPrecioVenta = productos.map(item => item);
 ordenarPrecioVenta.sort(function(a, b) {
     return a.precio - b.precio;
 });
-console.log("Lista de precios ordenada de menor a mayor:\n\n", ordenarPrecioVenta);
+console.log('Lista de precios ordenada de menor a mayor:\n\n', ordenarPrecioVenta);
 
 // Agregar productos al HTML
-const cardProductos = document.getElementById("card-producto");
+const cardProductos = document.getElementById('card-producto');
 
 mostrarProductos(productos);
 
@@ -90,19 +90,19 @@ function mostrarProductos(array) {
 
     array.forEach((producto) => {
         let div = document.createElement('div');
-        div.classList.add("col", "mb-5");
+        div.classList.add('col', 'mb-5');
         div.innerHTML = `
-                        <div class="card h-100 border-primary border-3 card-efecto">
-                            <img class="card-img-top" src=${producto.img} alt="${producto.nombre}" title="${producto.nombre}" loading="lazy">
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <h5 class="fw-bolder">${producto.nombre}</h5>
+                        <div class='card h-100 border-primary border-3 card-efecto'>
+                            <img class='card-img-top' src=${producto.img} alt='${producto.nombre}' title='${producto.nombre}' loading='lazy'>
+                            <div class='card-body p-4'>
+                                <div class='text-center'>
+                                    <h5 class='fw-bolder'>${producto.nombre}</h5>
                                     $${producto.precio}
                                 </div>
                             </div>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center">
-                                    <button onclick=agregarAlCarrito(${producto.id}) class="btn btn-outline-dark mt-auto">Agregar al carrito</button>
+                            <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
+                                <div class='text-center'>
+                                    <button onclick=agregarAlCarrito(${producto.id}) class='btn btn-outline-dark mt-auto' data-bs-toggle='modal' data-bs-target='#modal-producto'>Agregar al carrito</button>
                                 </div>
                             </div>
                         </div>
@@ -142,11 +142,11 @@ function actualizarCarrito() {
 
     carrito.forEach((producto) => {
         contenedorCarrito.innerHTML += `
-                                        <div class="producto-carrito">
-                                            <img class="card-img-top img-carrito" src=${producto.img} alt="${producto.nombre}" title="${producto.nombre}" loading="lazy">
-                                            <p class="pt-3">${producto.nombre}</p>
-                                            <p class="pt-3">$${producto.precio}</p>
-                                            <button onclick=eliminarProducto(${producto.id}) class="boton-eliminar"><i class="far fa-trash-alt"></i></i></button>
+                                        <div class='producto-carrito'>
+                                            <img class='card-img-top img-carrito' src=${producto.img} alt='${producto.nombre}' title='${producto.nombre}' loading='lazy'>
+                                            <p class='pt-3'>${producto.nombre}</p>
+                                            <p class='pt-3'>$${producto.precio}</p>
+                                            <button onclick=eliminarProducto(${producto.id}) class='boton-eliminar'><i class='far fa-trash-alt'></i></i></button>
                                         </div>
                                        `
     })
@@ -176,7 +176,7 @@ function eliminarProducto(id) {
 
 // Eliminar todos los productos
 function eliminarTodo() {
-    if (confirm("¿Querés vaciar el carrito?")) {
+    if (confirm('¿Querés vaciar el carrito?')) {
         localStorage.clear(carrito);
         carrito = [];
         actualizarCarrito();
@@ -184,4 +184,4 @@ function eliminarTodo() {
 }
 
 // Mostrar en consola en carrito de Local Storage
-console.log("Carrito de compras en Local Storage:\n\n", carritoLocalStorage);
+console.log('Carrito de compras en Local Storage:\n\n', carritoLocalStorage);
