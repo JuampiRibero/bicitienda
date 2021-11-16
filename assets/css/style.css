@@ -84,19 +84,19 @@ footer {
     align-items: left;
 }
 
-.card-efecto {
-    transition: all 400ms ease;
-}
-
-.card-efecto:hover {
-    box-shadow: 5px 5px 20px rgba 0, 0, 0, 0.2;
-    transform: translateY(-3%);
-}
-
 .border-primary {
     border-color: #5A4A43 !important; 
 }
 
 .modal-footer {
     justify-content: flex-start;
+}
+
+.contenedor-filtro {
+    padding-top: 96px;
+    text-align: center;
+}
+
+.bg-modal-fade {
+    background-color: rgba(0, 0, 0, 0.3);
 }

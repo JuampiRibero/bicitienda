@@ -1,0 +1,83 @@
+[
+    {
+      "id": 1,
+      "nombre": "Oxea Packard",
+      "marca": "Oxea",
+      "precio": 86600,
+      "stock": 50,
+      "cantidad": 1,
+      "img": "https://i.ibb.co/MZCfrCp/oxea-packard.png",
+      "tipo": "Mountain Bike"
+    },
+    {
+        "id": 2,
+        "nombre": "Oxea Eikon",
+        "marca": "Oxea",
+        "precio": 82000,
+        "stock": 50,
+        "cantidad": 1,
+        "img": "https://i.ibb.co/X2jq1Z5/oxea-eikon.png",
+        "tipo": "Mountain Bike"
+    },
+    {
+        "id": 3,
+        "nombre": "Oxea Talus",
+        "marca": "Oxea",
+        "precio": 68100,
+        "stock": 50,
+        "cantidad": 1,
+        "img": "https://i.ibb.co/v4tYDnx/oxea-talus.png",
+        "tipo": "Mountain Bike"
+    },
+    {
+        "id": 4,
+        "nombre": "Oxea Riddich",
+        "marca": "Oxea",
+        "precio": 54000,
+        "stock": 50,
+        "cantidad": 1,
+        "img": "https://i.ibb.co/NtfJKm8/oxea-riddich.png",
+        "tipo": "Mountain Bike"
+    },
+    {
+        "id": 5,
+        "nombre": "Oxea Shadane",
+        "marca": "Oxea",
+        "precio": 47600,
+        "stock": 50,
+        "cantidad": 1,
+        "img": "https://i.ibb.co/vdZBMYH/oxea-shadane.png",
+        "tipo": "Mountain Bike"
+    },
+    {
+        "id": 6,
+        "nombre": "Oxea Hunter",
+        "marca": "Oxea",
+        "precio": 45800,
+        "stock": 50,
+        "cantidad": 1,
+        "img": "https://i.ibb.co/TYxPzdv/oxea-hunter.png",
+        "tipo": "Mountain Bike"
+    },
+    {
+        "id": 7,
+        "nombre": "Oxea Campus",
+        "marca": "Oxea",
+        "precio": 51700,
+        "stock": 50,
+        "cantidad": 1,
+        "img": "https://i.ibb.co/ccnJ4kw/oxea-campus.png",
+        "tipo": "Paseo"
+    },
+    {
+        "id": 8,
+        "nombre": "Oxea Plegable",
+        "marca": "Oxea",
+        "precio": 49300,
+        "stock": 50,
+        "cantidad": 1,
+        "img": "https://i.ibb.co/Ny2SVsP/oxea-plegable.png",
+        "tipo": "Paseo"
+    }
+  ]
+  

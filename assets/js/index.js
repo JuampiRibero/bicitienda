@@ -1,118 +1,83 @@
-// Creación de objeto mediante clases y métodos
-class Producto {
-    constructor(id, nombre, marca, precio, stock, img) {
-        this.id = id;
-        this.nombre = nombre;
-        this.marca = marca;
-        this.precio = parseFloat(precio);
-        this.stock = stock;
-        this.img = img;
+const URL_JSON = 'assets/db/productos.json'
 
+// Agregar productos al HTML a través de getJSON
+$.getJSON(URL_JSON, (response, status) => {
+
+    if (status !== 'success') {
+        throw new Error('error')
     }
-    getPrecio() {
-    return this.precio;
+
+    for (const producto of response) {
+
+        $('#card-producto').append(
+                                    `       
+                                    <div class='col mb-5'>
+                                        <div class='card h-100 border-primary border-3 card-efecto'>
+                                            <img class='card-img-top' src='${producto.img}' alt='${producto.nombre}' title='${producto.nombre}' loading='lazy'>
+                                            <div class='card-body p-4'>
+                                                <div class='text-center'>
+                                                    <h5 class='fw-bolder'>${producto.nombre}</h5>
+                                                    $${producto.precio}
+                                                </div>
+                                            </div>
+                                            <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
+                                                <div class='text-center'>
+                                                    <button type='button' onclick=agregarAlCarrito(${producto.id}) class='btn btn-outline-dark mt-auto btn-abrir-modal-producto'>Agregar al carrito</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `
+        )
+        productos.push(producto);
     }
-}
 
-// Lista de productos y carrito
-let productos = JSON.parse(localStorage.getItem('productos')) || [];
-let carrito = [];
+    // Animar card productos
+    $(".card-efecto").hover(function() {
+        $(this).css({
+            'transition': 'all 400ms ease',
+            'transform': 'translateY(-3%)'
+        });
+    },
+    function() {
+        $(this).css({
+            'transition': 'all 400ms ease',
+            'transform': 'translateY(0%)'
+        });
+    });
 
-// Método que retorna la lista de productos
-const getAll = () => {
-    return productos;
-}
-
-// Metodo para agregar un producto a la lista
-const create = (producto) => {
-    productos.push(producto);
-}
-
-// Método para hallar un producto por nombre
-const findOne = (id) => {
-    const prod = productos.find( prod => prod.id === id);
-    if(!prod){
-        throw new Error(`No existe el producto con id #${id}`);
-    }
-    return prod;
-}
-
-// Método para modificar un producto
-const update = (id, precio) => {
-    const prod = findOne(id);
-    prod.precio = precio;
-}
-
-// Método para eliminar un producto
-const remove = (id) => {
-    const prod = findOne(id);
-    const index = productos.indexOf(prod);
-    productos.splice(index, 1);
-    localStorage.setItem('productos', JSON.stringify(productos));
-}
-
-// Crear los productos como instancia de la clase Producto
-const producto1 = new Producto(1, 'Oxea Packard', 'Oxea', 86600, 50, src='https://i.ibb.co/MZCfrCp/oxea-packard.png');
-const producto2 = new Producto(2, 'Oxea Eikon', 'Oxea', 82000, 50, src='https://i.ibb.co/X2jq1Z5/oxea-eikon.png');
-const producto3 = new Producto(3, 'Oxea Talus', 'Oxea', 68100, 50, src='https://i.ibb.co/v4tYDnx/oxea-talus.png');
-const producto4 = new Producto(4, 'Oxea Riddich', 'Oxea', 54000, 50, src='https://i.ibb.co/NtfJKm8/oxea-riddich.png');
-const producto5 = new Producto(5, 'Oxea Shadane', 'Oxea', 47600, 50, src='https://i.ibb.co/vdZBMYH/oxea-shadane.png');
-const producto6 = new Producto(6, 'Oxea Hunter', 'Oxea', 45800, 50, src='https://i.ibb.co/TYxPzdv/oxea-hunter.png');
-const producto7 = new Producto(7, 'Oxea Campus', 'Oxea', 51700, 50, src='https://i.ibb.co/ccnJ4kw/oxea-campus.png');
-const producto8 = new Producto(8, 'Oxea Plegable', 'Oxea', 49300, 50, src='https://i.ibb.co/Ny2SVsP/oxea-plegable.png');
-
-// Agregar productos a la lista
-create(producto1);
-create(producto2);
-create(producto3);
-create(producto4);
-create(producto5);
-create(producto6);
-create(producto7);
-create(producto8);
-
-// Catálogo ordenado por precios de menor a mayor, mostrado en consola
-var ordenarPrecioVenta = [];
-ordenarPrecioVenta = productos.map(item => item);
-ordenarPrecioVenta.sort(function(a, b) {
-    return a.precio - b.precio;
-});
-console.log('Lista de precios ordenada de menor a mayor:\n\n', ordenarPrecioVenta);
-
-// Agregar productos al HTML
-const cardProductos = document.getElementById('card-producto');
-
-mostrarProductos(productos);
-
-function mostrarProductos(array) {
-
-    cardProductos.innerHTML = '';
-
-    array.forEach((producto) => {
-        let div = document.createElement('div');
-        div.classList.add('col', 'mb-5');
-        div.innerHTML = `
-                        <div class='card h-100 border-primary border-3 card-efecto'>
-                            <img class='card-img-top' src=${producto.img} alt='${producto.nombre}' title='${producto.nombre}' loading='lazy'>
-                            <div class='card-body p-4'>
-                                <div class='text-center'>
-                                    <h5 class='fw-bolder'>${producto.nombre}</h5>
-                                    $${producto.precio}
-                                </div>
-                            </div>
-                            <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
-                                <div class='text-center'>
-                                    <button onclick=agregarAlCarrito(${producto.id}) class='btn btn-outline-dark mt-auto' data-bs-toggle='modal' data-bs-target='#modal-producto'>Agregar al carrito</button>
+    // Animar modal producto agregado
+    $('.btn-abrir-modal-producto').click( () => {
+        $('#modal-producto').html('');
+        $('#modal-producto')
+            .append(
+                    `
+                    <div class='modal-dialog'>
+                        <div class='modal-content'>
+                            <div class='modal-body'>
+                                <div id='row my-3'>
+                                    <div class='col-12'>
+                                        <p class='d-flex justify-content-center'><i class='far fa-check-circle fa-5x text-success'></i></p>
+                                        <p class='text-center fs-5'>¡Producto agregado al carrito!</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        `
-        cardProductos.appendChild(div);
+                    </div>
+                    `
+            )
+            .fadeIn(500)
+            .delay(750)
+            .fadeOut(500)
     })
 
-}
+})
+
+const productos = [];
 
 // Agregar productos al carrito (se van cargando en el Local Storage)
+let carrito = [];
+
 let carritoLocalStorage = JSON.parse(localStorage.getItem('carrito'));
 
 if (carritoLocalStorage) {
@@ -120,59 +85,66 @@ if (carritoLocalStorage) {
     actualizarCarrito();
 }
 
-function agregarAlCarrito(id) {
-    const agregarProducto = findOne(id);
-    if (agregarProducto) {
+function agregarAlCarrito(idProd) {
+    const agregarProducto = carrito.find(prod => prod.id === idProd);
+    const {stock} = productos.find(prod => prod.id === idProd);
+
+    if(agregarProducto) {
+        if((agregarProducto.cantidad + 1) <= stock) {
+            agregarProducto.cantidad +=1;
+        } else {
+            alert('¡No hay stock!');
+        }
+    }else if(stock > 0) {
+        const agregarProducto = productos.find(prod => prod.id === idProd);
         carrito.push(agregarProducto);
-    }
-    actualizarCarrito();
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-}
+    }else {
+        alert('¡No hay stock!');
+    }    
 
-// Actualizar carrito
-function actualizarCarrito() {
-    
-    const contenedorCarrito = document.getElementById('contenedor-carrito');
-    const subtotal = document.getElementById('subtotal');
-    const precioConIva = document.getElementById('precio-con-iva');
-    const precioAPagar = document.getElementById('precio-a-pagar');
-    const contadorCarrito = document.getElementById('contador-carrito');
-
-    contenedorCarrito.innerHTML = '';
-
-    carrito.forEach((producto) => {
-        contenedorCarrito.innerHTML += `
-                                        <div class='producto-carrito'>
-                                            <img class='card-img-top img-carrito' src=${producto.img} alt='${producto.nombre}' title='${producto.nombre}' loading='lazy'>
-                                            <p class='pt-3'>${producto.nombre}</p>
-                                            <p class='pt-3'>$${producto.precio}</p>
-                                            <button onclick=eliminarProducto(${producto.id}) class='boton-eliminar'><i class='far fa-trash-alt'></i></i></button>
-                                        </div>
-                                       `
-    })
-    
-    let sumaProductos = carrito.reduce((acum, prod) => acum += prod.precio, 0);
-    let ivaProductos = carrito.reduce((acum, prod) => acum += prod.precio * 0.21, 0);
-    
-    subtotal.innerText = sumaProductos.toFixed(2);
-    precioConIva.innerText = ivaProductos.toFixed(2);
-    precioConDecimal = sumaProductos + ivaProductos;
-    precioAPagar.innerText = precioConDecimal.toFixed(2);
-    localStorage.setItem('precioConDecimal', JSON.stringify(precioConDecimal));
-    
-    contadorCarrito.innerText = carrito.length;
-    localStorage.setItem('contadorCarrito', JSON.stringify(carrito.length));
-}
-
-// Eliminar producto
-function eliminarProducto(id) {
-    const sacarProducto = findOne(id);
-    const index = carrito.indexOf(sacarProducto);
-    carrito.splice(index, 1);
-    
     localStorage.setItem('carrito', JSON.stringify(carrito));
     actualizarCarrito();
 }
+
+// Eliminar productos de a una unidad
+function eliminarUnProducto(idProd) {
+    const sacarUnProducto = carrito.find(prod => prod.id === idProd);
+
+    sacarUnProducto.cantidad --;
+
+    if(sacarUnProducto.cantidad === 0) {
+        const indice = carrito.indexOf(sacarUnProducto);
+        carrito.splice(indice, 1);
+    }    
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarCarrito();
+}
+
+// Agregar productos de a una unidad
+function agregarUnProducto(idProd) {
+    const agregarUnProducto = carrito.find(prod => prod.id === idProd);
+
+    agregarUnProducto.cantidad ++;
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarCarrito();
+}
+
+// // Eliminar todos los productos iguales
+// function eliminarProductoIgual(idProd) {
+//     const sacarProductoIgual = carrito.find(prod => prod.id === idProd);
+
+//     // sacarProductoIgual.cantidad --;
+
+//     if(sacarProductoIgual === idProd) {
+//         const indice = carrito.indexOf(sacarProductoIgual);
+//         carrito.remove(indice, 1);
+//     }    
+
+//     localStorage.setItem('carrito', JSON.stringify(carrito));
+//     actualizarCarrito();
+// }
 
 // Eliminar todos los productos
 function eliminarTodo() {
@@ -183,5 +155,46 @@ function eliminarTodo() {
     }
 }
 
-// Mostrar en consola en carrito de Local Storage
-console.log('Carrito de compras en Local Storage:\n\n', carritoLocalStorage);
+// Actualizar carrito
+function actualizarCarrito() {
+    const contenedorCarrito = document.getElementById('contenedor-carrito');
+    const subtotal = document.getElementById('subtotal');
+    const precioConIva = document.getElementById('precio-con-iva');
+    const precioAPagar = document.getElementById('precio-a-pagar');
+    const contadorCarrito = document.getElementById('contador-carrito');
+    contenedorCarrito.innerHTML = '';
+
+    carrito.forEach((producto) => {
+        contenedorCarrito.innerHTML += `
+                                        <div class='producto-carrito'>
+                                            <img class='card-img-top img-carrito' src=${producto.img} alt='${producto.nombre}' title='${producto.nombre}' loading='lazy'>
+                                            <p class='pt-3'>${producto.nombre}</p>
+                                            <p class='pt-3'>
+                                                <i onclick=eliminarUnProducto(${producto.id})><span role="button" class="fas fa-minus-circle me-1"></span></i>${producto.cantidad}<i onclick=agregarUnProducto(${producto.id})><span role="button" class="fas fa-plus-circle ms-1"></span></i>
+                                            </p>
+                                            <p class='pt-3'>$${producto.precio * producto.cantidad}</p>
+                                            <button onclick=eliminarProductoIgual(${producto.id}) class='boton-eliminar'><i class='far fa-trash-alt'></i></i></button>
+                                        </div>
+                                        `
+    })
+    
+    let sumaProductos = carrito.reduce((acum, prod) => acum + (prod.precio * prod.cantidad), 0);
+    let ivaProductos = carrito.reduce((acum, prod) => acum + (prod.precio * prod.cantidad) * 0.21, 0);
+    subtotal.innerText = sumaProductos.toFixed(2);
+    precioConIva.innerText = ivaProductos.toFixed(2);
+    precioConDecimal = sumaProductos + ivaProductos;
+    precioAPagar.innerText = precioConDecimal.toFixed(2);
+    localStorage.setItem('precioConDecimal', JSON.stringify(precioConDecimal));
+
+    contadorCarrito.innerText = carrito.reduce((acum, prod) => acum + prod.cantidad, 0);
+    localStorage.setItem('contadorCarrito', JSON.stringify(carrito.reduce((acum, prod) => acum + prod.cantidad, 0)));
+}
+
+// Animar modal carrito
+$('#btn-abrir-carrito').click( () => {
+    $('#modal-carrito').fadeIn(500)
+})
+
+$('#btn-cerrar-carrito').click( () => {
+    $('#modal-carrito').fadeOut(500)
+})

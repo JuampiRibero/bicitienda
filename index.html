@@ -46,7 +46,7 @@
                     <li class="nav-item"><a class="nav-link" href="#!">TIENDA</a></li>
                 </ul>
                 <form class="d-flex">
-                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modal-carrito">
+                    <button id="btn-abrir-carrito" type="button" class="btn btn-outline-dark" >
                         <i class="fas fa-shopping-cart bi-cart-fill me-1" data-inline="false"></i>
                         <span id="contador-carrito" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                     </button>
@@ -59,11 +59,21 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Curso JavaScript - 2da Entrega Proyecto Final</h1>
+                <h1 class="display-4 fw-bolder">Curso JavaScript - 3er Entrega Proyecto Final</h1>
             </div>
         </div>
     </header>
     <!-- Fin encabezado -->
+    <!-- Inicio filtro -->
+    <!-- <div class="contenedor-filtro">
+        <p class="fs-4">Aplicar Filtro:</p>
+        <select id="filtro-producto">
+            <option value="Todos">Todos</option>
+            <option value="Mountain Bike">Mountain Bike</option>
+            <option value="Paseo">Paseo</option>
+        </select>
+    </div> -->
+    <!-- Fin filtro -->
     <!-- Inicio sección productos -->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
@@ -74,12 +84,12 @@
     </section>
     <!-- Fin sección productos -->
     <!-- Inicio modal carrito -->
-    <div class="modal fade" id="modal-carrito" tabindex="-1">
+    <div class="modal bg-modal-fade" id="modal-carrito">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Carrito</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button id="btn-cerrar-carrito" type="button" class="btn-close"></button>
                 </div>
                 <div class="modal-body">
                     <!-- <div class="text-center" id="carrito-vacio">
@@ -104,25 +114,8 @@
     </div>
     <!-- Fin modal carrito -->
     <!-- Inicio modal producto agregado -->
-    <div class="modal fade" id="modal-producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
-        <div class="modal-dialog modal-side modal-bottom-right" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="row my-3">
-                        <div class="col-12">
-                            <p class="d-flex justify-content-center"><i class="far fa-check-circle fa-5x text-success"></i></p>
-                            <p class="text-center fs-5">¡Producto agregado al carrito!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-outline-dark mt-auto" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modal-carrito">Ir al carrito</button>
-                </div>
-            </div>
-        </div>
+    <div class="modal bg-modal-fade" id="modal-producto">
+
     </div>
     <!-- Fin modal producto agregado -->
     <!-- Inicio pie de página -->
@@ -158,7 +151,7 @@
     </footer>
     <!-- Fin pie de página -->
     <!-- JS Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <!-- JS Font Awesome -->
