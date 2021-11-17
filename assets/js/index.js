@@ -17,7 +17,7 @@ $.getJSON(URL_JSON, (response, status) => {
                                             <div class='card-body p-4'>
                                                 <div class='text-center'>
                                                     <h5 class='fw-bolder'>${producto.nombre}</h5>
-                                                    $${producto.precio}
+                                                    $${Intl.NumberFormat("de-DE").format(producto.precio)}
                                                 </div>
                                             </div>
                                             <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
@@ -67,7 +67,7 @@ $.getJSON(URL_JSON, (response, status) => {
                     `
             )
             .fadeIn(500)
-            .delay(750)
+            .delay(500)
             .fadeOut(500)
     })
 
@@ -131,20 +131,20 @@ function agregarUnProducto(idProd) {
     actualizarCarrito();
 }
 
-// // Eliminar todos los productos iguales
-// function eliminarProductoIgual(idProd) {
-//     const sacarProductoIgual = carrito.find(prod => prod.id === idProd);
+// Eliminar todos los productos iguales
+function eliminarProductoIgual(idProd) {
+    const sacarProductoIgual = carrito.find(prod => prod.id === idProd);
 
-//     // sacarProductoIgual.cantidad --;
+    sacarProductoIgual.cantidad = 0;
 
-//     if(sacarProductoIgual === idProd) {
-//         const indice = carrito.indexOf(sacarProductoIgual);
-//         carrito.remove(indice, 1);
-//     }    
+    if(sacarProductoIgual.cantidad === 0) {
+        const indice = carrito.indexOf(sacarProductoIgual);
+        carrito.splice(indice, 1);
+    }    
 
-//     localStorage.setItem('carrito', JSON.stringify(carrito));
-//     actualizarCarrito();
-// }
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarCarrito();
+}
 
 // Eliminar todos los productos
 function eliminarTodo() {
@@ -159,7 +159,7 @@ function eliminarTodo() {
 function actualizarCarrito() {
     const contenedorCarrito = document.getElementById('contenedor-carrito');
     const subtotal = document.getElementById('subtotal');
-    const precioConIva = document.getElementById('precio-con-iva');
+    const iva = document.getElementById('precio-con-iva');
     const precioAPagar = document.getElementById('precio-a-pagar');
     const contadorCarrito = document.getElementById('contador-carrito');
     contenedorCarrito.innerHTML = '';
@@ -172,7 +172,7 @@ function actualizarCarrito() {
                                             <p class='pt-3'>
                                                 <i onclick=eliminarUnProducto(${producto.id})><span role="button" class="fas fa-minus-circle me-1"></span></i>${producto.cantidad}<i onclick=agregarUnProducto(${producto.id})><span role="button" class="fas fa-plus-circle ms-1"></span></i>
                                             </p>
-                                            <p class='pt-3'>$${producto.precio * producto.cantidad}</p>
+                                            <p class='pt-3'>$${Intl.NumberFormat("de-DE").format(producto.precio * producto.cantidad)}</p>
                                             <button onclick=eliminarProductoIgual(${producto.id}) class='boton-eliminar'><i class='far fa-trash-alt'></i></i></button>
                                         </div>
                                         `
@@ -180,12 +180,11 @@ function actualizarCarrito() {
     
     let sumaProductos = carrito.reduce((acum, prod) => acum + (prod.precio * prod.cantidad), 0);
     let ivaProductos = carrito.reduce((acum, prod) => acum + (prod.precio * prod.cantidad) * 0.21, 0);
-    subtotal.innerText = sumaProductos.toFixed(2);
-    precioConIva.innerText = ivaProductos.toFixed(2);
-    precioConDecimal = sumaProductos + ivaProductos;
-    precioAPagar.innerText = precioConDecimal.toFixed(2);
-    localStorage.setItem('precioConDecimal', JSON.stringify(precioConDecimal));
-
+    subtotal.innerText = Intl.NumberFormat("de-DE").format(sumaProductos);
+    iva.innerText = Intl.NumberFormat("de-DE").format(ivaProductos);
+    precioLocalStorage = sumaProductos + ivaProductos;
+    precioAPagar.innerText = Intl.NumberFormat("de-DE").format(precioLocalStorage);
+    localStorage.setItem('precioLocalStorage', JSON.stringify(precioLocalStorage));
     contadorCarrito.innerText = carrito.reduce((acum, prod) => acum + prod.cantidad, 0);
     localStorage.setItem('contadorCarrito', JSON.stringify(carrito.reduce((acum, prod) => acum + prod.cantidad, 0)));
 }
