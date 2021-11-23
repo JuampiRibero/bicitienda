@@ -6,6 +6,13 @@
 
 .bg-light {
     background-color: #fff !important;
+    opacity: 0.75;
+    transition: 0.5s ease;
+}
+
+.bg-light:hover {
+    background-color: #fff !important;
+    opacity: 1;
 }
 
 .bg-dark {
@@ -21,17 +28,9 @@ footer {
 }
 
 .nav-logo {
-    width: 250px;
-    height: 250px;
-    margin: 20px;
-    transition: transform 0.5s ease;
-}
+    width: 200px;
+    height: 200px;
 
-.nav-logo:hover {
-  -webkit-transform: scale(1.25, 1.25);
-  -o-transform: scale(1.25, 1.25);
-  -moz-transform: scale(1.25, 1.25);
-  transform: scale(1.25, 1.25);
 }
 
 .nav-logo-footer {
@@ -53,12 +52,29 @@ footer {
     border-color: #5A4A43;
 }
 
+.btn-outline-dark-principal {
+    color: #fff;
+    background-color: #F49E2C;
+    border: 2.5px solid #5A4A43;
+    opacity: 0.75;
+
+}
+
+.btn-outline-dark-principal:hover {
+    color: #5A4A43;
+    background-color: #fff;
+    border-color: #5A4A43;
+    opacity: 0.75;
+}
+
 .producto-carrito {
     margin: 10px 0;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #5A4A43;
+    border-top: 1px solid #5A4A43;
 }
 
 .img-carrito {
@@ -88,8 +104,13 @@ footer {
     border-color: #5A4A43 !important; 
 }
 
+.modal-header {
+    border-bottom: 2px solid #5A4A43;
+}
+
 .modal-footer {
     justify-content: flex-start;
+    border-top: 2px solid #5A4A43;
 }
 
 .contenedor-filtro {
@@ -99,4 +120,46 @@ footer {
 
 .bg-modal-fade {
     background-color: rgba(0, 0, 0, 0.3);
+}
+
+.encabezado {
+    min-height: 30rem;
+    position: relative;
+    display: table;
+    width: 100%;
+    height: auto;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://i.ibb.co/8PzgyTm/fondo.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.encabezado h1, .encabezado .h1 {
+    font-size: 4rem;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 992px) {
+    .encabezado {
+      height: 100vh;
+    }
+    .encabezado h1, .encabezado .h1 {
+      font-size: 5.5rem;
+    }
+}
+
+@media (max-width: 1350px) {
+    .banner {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    #modal-carrito {
+        font-size: 0.80rem;
+    }
+    .img-carrito {
+        display: none;
+    }
 }

@@ -174,6 +174,7 @@ function actualizarCarrito() {
                                             </p>
                                             <p class='pt-3'>$${Intl.NumberFormat("de-DE").format(producto.precio * producto.cantidad)}</p>
                                             <button onclick=eliminarProductoIgual(${producto.id}) class='boton-eliminar'><i class='far fa-trash-alt'></i></i></button>
+                                            <tr>
                                         </div>
                                         `
     })

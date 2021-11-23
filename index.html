@@ -32,47 +32,54 @@
     <title>BiciTienda - Tienda exclusiva OXEA</title>
 </head>
 <body>
-    <!-- Inicio menú de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.html">
-                <img src="https://i.ibb.co/xHTQSR9/logo-bicitienda.png" alt="Logo BiciTienda" title="BiciTienda" class="nav-logo" loading="lazy">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">INICIO</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">SOBRE NOSOTROS</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">TIENDA</a></li>
-                </ul>
-                <form class="d-flex">
-                    <button id="btn-abrir-carrito" type="button" class="btn btn-outline-dark" >
-                        <i class="fas fa-shopping-cart bi-cart-fill me-1" data-inline="false"></i>
-                        <span id="contador-carrito" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </nav>
-    <!-- Fin menú de navegación -->
     <!-- Inicio encabezado -->
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Curso JavaScript - 3er Entrega Proyecto Final</h1>
+    <header class="encabezado" id="inicio">
+        <!-- Inicio menú de navegación -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://i.ibb.co/xHTQSR9/logo-bicitienda.png" alt="Logo BiciTienda" title="BiciTienda" class="nav-logo" loading="lazy">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="#inicio">INICIO</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">SOBRE NOSOTROS</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#productos">TIENDA</a></li>
+                    </ul>
+                    <form class="d-flex">
+                        <button id="btn-abrir-carrito" type="button" class="btn btn-outline-dark" >
+                            <i class="fas fa-shopping-cart bi-cart-fill me-1" data-inline="false"></i>
+                            <span id="contador-carrito" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- Fin menú de navegación -->
+        <div class="d-flex align-items-center">
+            <div class="container px-4 px-lg-5 text-center my-5">
+                <h1 class="my-5">BiciTienda</h1>
+                <h3 ><emclass="my-5">Tienda online especializada en bicicletas OXEA. Contamos con una amplia variedad de modelos y el mejor asesoramiento.</em></h3>
+                <a class="btn btn-outline-dark btn-xl my-5 btn-outline-dark-principal" href="#productos">¡Conocé nuestros productos!</a>
             </div>
         </div>
     </header>
     <!-- Fin encabezado -->
     <!-- Inicio sección productos -->
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
+    <section class="pt-5" id="productos">
+        <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="card-producto">
 
             </div>
         </div>
     </section>
     <!-- Fin sección productos -->
+    <!-- Inicio banner publicitario -->
+    <div class="container banner pb-5">
+        <img src="https://i.ibb.co/KjX284y/banner.jpg"  alt="Publicidad" title="Publicidad" loading='lazy'>
+    </div>
+    <!-- fin banner publicitario -->
     <!-- Inicio modal carrito -->
     <div class="modal bg-modal-fade" id="modal-carrito">
         <div class="modal-dialog">
