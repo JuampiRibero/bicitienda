@@ -15,9 +15,9 @@ $.getJSON(URL_JSON, (response, status) => {
                                         <div class='card h-100 border-primary border-3 card-efecto'>
                                             <img class='card-img-top' src='${producto.img}' alt='${producto.nombre}' title='${producto.nombre}' loading='lazy'>
                                             <div class='card-body p-4'>
-                                                <div class='text-center'>
-                                                    <h5 class='fw-bolder'>${producto.nombre}</h5>
-                                                    $${Intl.NumberFormat("de-DE").format(producto.precio)}
+                                                <div>
+                                                    <h4 class='text-center fw-bolder'>${producto.nombre}</h4>
+                                                    <p class='text-center fw-bolder'>$${Intl.NumberFormat("de-DE").format(producto.precio)}</p>
                                                 </div>
                                             </div>
                                             <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
@@ -188,6 +188,37 @@ function actualizarCarrito() {
     localStorage.setItem('precioLocalStorage', JSON.stringify(precioLocalStorage));
     contadorCarrito.innerText = carrito.reduce((acum, prod) => acum + prod.cantidad, 0);
     localStorage.setItem('contadorCarrito', JSON.stringify(carrito.reduce((acum, prod) => acum + prod.cantidad, 0)));
+}
+
+// Finalizar compra
+const URL = 'https://api.mercadopago.com/checkout/preferences'
+
+const finalizarCompra = () => {
+
+    const carritoMercadoPago = carrito.map(prod => ({
+        category_id: prod.id,
+        currency_id: "ARS",
+        description: "",
+        id: "",
+        picture_url: prod.img,
+        quantity: prod.cantidad,
+        title: prod.nombre,
+        unit_price: prod.precio + (prod.precio * 0.21), 
+    }))
+
+    fetch(URL, {
+        method: "POST",
+        headers: {
+            Authorization: 'Bearer TEST-6749401201952774-052316-331a4b286472f40790ff1702e7a29e62-292785847',
+        },
+        body: JSON.stringify({
+        items: carritoMercadoPago,
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            window.open(data.init_point, '_blank')
+        })
 }
 
 // Animar modal carrito

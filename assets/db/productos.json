@@ -1,13 +1,13 @@
 [
     {
-      "id": 1,
-      "nombre": "Oxea Packard",
-      "marca": "Oxea",
-      "precio": 86600,
-      "stock": 50,
-      "cantidad": 1,
-      "img": "https://i.ibb.co/MZCfrCp/oxea-packard.png",
-      "tipo": "Mountain Bike"
+        "id": 1,
+        "nombre": "Oxea Packard",
+        "marca": "Oxea",
+        "precio": 86600,
+        "stock": 50,
+        "cantidad": 1,
+        "img": "https://i.ibb.co/MZCfrCp/oxea-packard.png",
+        "tipo": "Mountain Bike"
     },
     {
         "id": 2,
