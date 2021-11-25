@@ -92,7 +92,7 @@ function agregarAlCarrito(idProd) {
     if(agregarProducto) {
         if((agregarProducto.cantidad + 1) <= stock) {
             agregarProducto.cantidad +=1;
-        } else {
+        }else {
             alert('¡No hay stock!');
         }
     }else if(stock > 0) {
@@ -229,3 +229,17 @@ $('#btn-abrir-carrito').click( () => {
 $('#btn-cerrar-carrito').click( () => {
     $('#modal-carrito').fadeOut(500)
 })
+
+// Botón back to top
+$(window).scroll( () => {
+    if($(window).scrollTop() > 300) {
+        $('#back-to-top-btn').addClass('show');
+    }else {
+        $('#back-to-top-btn').removeClass('show');
+    }
+});
+
+$('#back-to-top-btn').on('click', (e) => {
+    e.preventDefault();
+    $('html, body').animate({scrollTop:0}, '300');
+});

@@ -140,6 +140,34 @@ footer {
     padding: 0;
 }
 
+#back-to-top-btn {
+    display: inline-block;
+    background-color: #F49E2C;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: background-color .3s, 
+      opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    color: #fff;
+    line-height: 60px;
+}
+
+#back-to-top-btn:hover {
+    cursor: pointer;
+}
+
+#back-to-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
 @media (min-width: 992px) {
     .encabezado {
       height: 100vh;
@@ -161,5 +189,15 @@ footer {
     }
     .img-carrito {
         display: none;
+    }
+    #back-to-top-btn {
+        transform: scale(0.75);
+        bottom: 7.5px;
+        right: 7.5px;
+    }
+    .nav-logo {
+        width: 125px;
+        height: 125px;
+    
     }
 }
